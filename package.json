@@ -1,0 +1,70 @@
+{
+  "name": "ai-hub-desktop",
+  "version": "1.0.0",
+  "description": "Hub desktop para múltiplas inteligências artificiais",
+  "main": "main.js",
+  "homepage": ".",
+  "scripts": {
+    "start": "electron .",
+    "start-alt": "electron main-alternative.js",
+    "dev": "SET NODE_ENV=development && electron .",
+    "dev-alt": "SET NODE_ENV=development && electron main-alternative.js",
+    "debug": "SET NODE_ENV=development && SET ELECTRON_ENABLE_LOGGING=1 && electron . --enable-logging --enable-dev-tools",
+    "debug-alt": "SET NODE_ENV=development && SET ELECTRON_ENABLE_LOGGING=1 && electron main-alternative.js --enable-logging --enable-dev-tools",
+    "build": "electron-builder",
+    "build-win": "set CSC_IDENTITY_AUTO_DISCOVERY=false && electron-builder --win",
+    "build-win-unsigned": "electron-builder --win --config.win.certificateFile=\"\" --config.win.certificatePassword=\"\"",
+    "build-dir": "electron-builder --dir",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux",
+    "dist": "electron-builder --publish=never",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ai",
+    "chatgpt",
+    "grok",
+    "deepseek",
+    "claude",
+    "desktop",
+    "electron"
+  ],
+  "author": "AI Hub Team",
+  "license": "MIT",
+  "build": {
+    "appId": "com.aihub.desktop",
+    "productName": "AI Hub Desktop",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "about.html",
+      "robot-icon.png",
+      "assets/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "robot-icon.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "robot-icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "robot-icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^37.3.1",
+    "electron-builder": "^26.0.12"
+  }
+}

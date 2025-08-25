@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - AI Hub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 40px;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .about-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 500px;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .about-logo {
+            width: 50px;
+            height: 50px;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        p {
+            margin: 15px 0;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .version {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 30px;
+        }
+        
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <h1>
+            <svg class="about-logo" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cabeça do robô -->
+                <rect x="40" y="50" width="120" height="100" rx="20" stroke="white" stroke-width="6" fill="none"/>
+                
+                <!-- Antenas -->
+                <line x1="70" y1="50" x2="70" y2="30" stroke="white" stroke-width="6"/>
+                <line x1="130" y1="50" x2="130" y2="30" stroke="white" stroke-width="6"/>
+                <circle cx="70" cy="30" r="8" stroke="white" stroke-width="6" fill="none"/>
+                <circle cx="130" cy="30" r="8" stroke="white" stroke-width="6" fill="none"/>
+                
+                <!-- Olhos -->
+                <circle cx="70" cy="80" r="15" stroke="white" stroke-width="6" fill="none"/>
+                <circle cx="130" cy="80" r="15" stroke="white" stroke-width="6" fill="none"/>
+                <circle cx="70" cy="80" r="8" fill="white"/>
+                <circle cx="130" cy="80" r="8" fill="white"/>
+                
+                <!-- Boca -->
+                <rect x="80" y="110" width="40" height="25" rx="12" stroke="white" stroke-width="6" fill="none"/>
+                <line x1="85" y1="115" x2="85" y2="130" stroke="white" stroke-width="4"/>
+                <line x1="95" y1="115" x2="95" y2="130" stroke="white" stroke-width="4"/>
+                <line x1="105" y1="115" x2="105" y2="130" stroke="white" stroke-width="4"/>
+                <line x1="115" y1="115" x2="115" y2="130" stroke="white" stroke-width="4"/>
+                
+                <!-- Corpo -->
+                <rect x="60" y="150" width="80" height="40" rx="15" stroke="white" stroke-width="6" fill="none"/>
+                
+                <!-- Detalhes do peito -->
+                <circle cx="100" cy="170" r="10" stroke="white" stroke-width="4" fill="none"/>
+            </svg>
+            AI Hub
+        </h1>
+        <p>Um hub desktop para acessar múltiplas inteligências artificiais em um só lugar.</p>
+        <p>Desenvolvido com Electron para fornecer uma experiência nativa e integrada.</p>
+        <p>Suporte para Grok, ChatGPT, DeepSeek e Claude.</p>
+        
+        <div class="version">
+            Versão 1.0.0
+        </div>
+        
+        <button class="close-btn" onclick="window.close()">Fechar</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hub - Múltiplas IAs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            -webkit-app-region: drag;
+        }
+
+        .ai-selector {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            -webkit-app-region: no-drag;
+        }
+
+        .ai-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ai-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .ai-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .ai-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .ai-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .grok {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), rgba(255, 107, 53, 0.1));
+            border-color: rgba(255, 107, 53, 0.5);
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
+        }
+
+        .grok:hover {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.4), rgba(255, 107, 53, 0.2));
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+        }
+
+        .chatgpt {
+            background: linear-gradient(135deg, rgba(16, 163, 127, 0.3), rgba(16, 163, 127, 0.1));
+            border-color: rgba(16, 163, 127, 0.5);
+            box-shadow: 0 2px 8px rgba(16, 163, 127, 0.2);
+        }
+
+        .chatgpt:hover {
+            background: linear-gradient(135deg, rgba(16, 163, 127, 0.4), rgba(16, 163, 127, 0.2));
+            box-shadow: 0 8px 24px rgba(16, 163, 127, 0.3);
+        }
+
+        .deepseek {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.3), rgba(88, 101, 242, 0.1));
+            border-color: rgba(88, 101, 242, 0.5);
+            box-shadow: 0 2px 8px rgba(88, 101, 242, 0.2);
+        }
+
+        .deepseek:hover {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.4), rgba(88, 101, 242, 0.2));
+            box-shadow: 0 8px 24px rgba(88, 101, 242, 0.3);
+        }
+
+        .claude {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.3), rgba(217, 119, 6, 0.1));
+            border-color: rgba(217, 119, 6, 0.5);
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
+        }
+
+        .claude:hover {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.4), rgba(217, 119, 6, 0.2));
+            box-shadow: 0 8px 24px rgba(217, 119, 6, 0.3);
+        }
+
+        .tab-container {
+            display: flex;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0 30px;
+            overflow-x: auto;
+            -webkit-app-region: drag;
+        }
+
+        .tab {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: white;
+            padding: 16px 20px;
+            cursor: pointer;
+            border-radius: 12px 12px 0 0;
+            margin-right: 4px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            min-width: 160px;
+            justify-content: space-between;
+            -webkit-app-region: no-drag;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: none;
+        }
+
+        .tab.active {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            border-bottom: 3px solid #ffffff;
+        }
+
+        .tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .tab:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tab.active::before {
+            transform: scaleX(1);
+            background: #ffffff;
+        }
+
+        .close-tab {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .close-tab:hover {
+            background: rgba(244, 67, 54, 0.8);
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+
+        .close-tab:active {
+            transform: scale(0.95);
+        }
+
+        .close-tab::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease;
+        }
+
+        .close-tab:hover::before {
+            width: 40px;
+            height: 40px;
+        }
+
+        .content {
+            height: calc(100vh - 120px); /* Altura sem barra de título personalizada */
+            position: relative;
+            pointer-events: none; /* Permite que BrowserViews recebam eventos */
+        }
+
+        .content.showing-welcome {
+            pointer-events: auto; /* Reabilita eventos quando mostra welcome */
+        }
+
+        .tab-content {
+            display: none;
+            height: 100%;
+            width: 100%;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .webview-container {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .welcome h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .ai-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .ai-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .ai-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .ai-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .ai-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .ai-card .name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .ai-card .description {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .loading {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .loading.show {
+            display: flex;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-left: 3px solid #ffffff;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes spin {
+            0% { 
+                transform: rotate(0deg);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            }
+            100% { 
+                transform: rotate(360deg);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ai-selector {
+                flex-wrap: wrap;
+            }
+
+            .ai-button {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .welcome h1 {
+                font-size: 2rem;
+            }
+
+            .welcome p {
+                font-size: 1rem;
+            }
+
+            .ai-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="ai-selector">
+            <button class="ai-button grok" onclick="openAI('grok')">
+                🤖 Grok
+            </button>
+            <button class="ai-button chatgpt" onclick="openAI('chatgpt')">
+                💬 ChatGPT
+            </button>
+            <button class="ai-button deepseek" onclick="openAI('deepseek')">
+                🧠 DeepSeek
+            </button>
+            <button class="ai-button claude" onclick="openAI('claude')">
+                🎭 Claude
+            </button>
+        </div>
+    </div>
+
+    <div class="tab-container" id="tabContainer">
+        <!-- Abas serão adicionadas dinamicamente aqui -->
+    </div>
+
+    <div class="content showing-welcome">
+        <div class="welcome" id="welcome">
+            <h1>🚀 AI Hub</h1>
+            <p>Bem-vindo ao seu hub de inteligência artificial desktop! Selecione uma das IAs abaixo para começar a interagir. Esta versão usa a barra de título nativa do Windows.</p>
+            
+            <div class="ai-grid">
+                <div class="ai-card" onclick="openAI('grok')">
+                    <div class="icon">🤖</div>
+                    <div class="name">Grok</div>
+                    <div class="description">IA do X (Twitter)</div>
+                </div>
+                <div class="ai-card" onclick="openAI('chatgpt')">
+                    <div class="icon">💬</div>
+                    <div class="name">ChatGPT</div>
+                    <div class="description">OpenAI</div>
+                </div>
+                <div class="ai-card" onclick="openAI('deepseek')">
+                    <div class="icon">🧠</div>
+                    <div class="name">DeepSeek</div>
+                    <div class="description">DeepSeek AI</div>
+                </div>
+                <div class="ai-card" onclick="openAI('claude')">
+                    <div class="icon">🎭</div>
+                    <div class="name">Claude</div>
+                    <div class="description">Anthropic</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div>Carregando IA...</div>
+        </div>
+
+        <!-- Conteúdo das abas será adicionado dinamicamente aqui -->
+    </div>
+
+    <script>
+        const aiConfigs = {
+            grok: {
+                name: 'Grok',
+                url: 'https://grok.com/chat',
+                icon: '🤖',
+                color: '#ff6b35'
+            },
+            chatgpt: {
+                name: 'ChatGPT',
+                url: 'https://chat.openai.com/',
+                icon: '💬',
+                color: '#10a37f'
+            },
+            deepseek: {
+                name: 'DeepSeek',
+                url: 'https://chat.deepseek.com/',
+                icon: '🧠',
+                color: '#5865f2'
+            },
+            claude: {
+                name: 'Claude',
+                url: 'https://claude.ai/',
+                icon: '🎭',
+                color: '#d97706'
+            }
+        };
+
+        let activeTab = null;
+        let openTabs = new Set();
+
+        // Função para mostrar loading
+        function showLoading() {
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('welcome').style.display = 'none';
+        }
+
+        // Função para esconder loading
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('show');
+        }
+
+        // Função para mostrar welcome screen
+        function showWelcome() {
+            hideLoading();
+            document.getElementById('welcome').style.display = 'flex';
+            document.querySelector('.content').classList.add('showing-welcome');
+            
+            // Esconder todas as BrowserViews
+            window.electronAPI.hideAllViews();
+        }
+
+        // Função para esconder welcome screen
+        function hideWelcome() {
+            document.getElementById('welcome').style.display = 'none';
+            document.querySelector('.content').classList.remove('showing-welcome');
+        }
+
+        // Função para abrir uma IA
+        async function openAI(aiType) {
+            try {
+                const config = aiConfigs[aiType];
+                if (!config) {
+                    console.error('Configuração não encontrada para:', aiType);
+                    return;
+                }
+
+                console.log(`Abrindo ${config.name}...`);
+                
+                // Mostrar loading se não houver abas abertas
+                if (openTabs.size === 0) {
+                    showLoading();
+                }
+
+                // Criar ou alternar para a aba
+                if (openTabs.has(aiType)) {
+                    await window.electronAPI.switchAITab(aiType);
+                } else {
+                    await window.electronAPI.createAITab(aiType, config.url);
+                    openTabs.add(aiType);
+                    addTab(aiType, config);
+                }
+
+                // Definir como aba ativa
+                setActiveTab(aiType);
+                hideWelcome();
+                
+            } catch (error) {
+                console.error('Erro ao abrir IA:', error);
+                hideLoading();
+            }
+        }
+
+        // Função para adicionar uma aba
+        function addTab(aiType, config) {
+            const tabContainer = document.getElementById('tabContainer');
+            
+            const tab = document.createElement('div');
+            tab.className = 'tab';
+            tab.dataset.aiType = aiType;
+            tab.onclick = () => switchTab(aiType);
+            
+            tab.innerHTML = `
+                <span>${config.icon} ${config.name}</span>
+                <button class="close-tab" onclick="closeTab('${aiType}', event)">×</button>
+            `;
+            
+            tabContainer.appendChild(tab);
+        }
+
+        // Função para alternar entre abas
+        async function switchTab(aiType) {
+            try {
+                await window.electronAPI.switchAITab(aiType);
+                setActiveTab(aiType);
+                hideWelcome();
+            } catch (error) {
+                console.error('Erro ao alternar aba:', error);
+            }
+        }
+
+        // Função para definir aba ativa
+        function setActiveTab(aiType) {
+            // Remover active de todas as abas
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Adicionar active à aba atual
+            const currentTab = document.querySelector(`[data-ai-type="${aiType}"]`);
+            if (currentTab) {
+                currentTab.classList.add('active');
+            }
+            
+            activeTab = aiType;
+        }
+
+        // Função para fechar uma aba
+        async function closeTab(aiType, event) {
+            event.stopPropagation();
+            
+            try {
+                await window.electronAPI.closeAITab(aiType);
+                
+                // Remover da UI
+                const tab = document.querySelector(`[data-ai-type="${aiType}"]`);
+                if (tab) {
+                    tab.remove();
+                }
+                
+                openTabs.delete(aiType);
+                
+                // Se era a aba ativa, mostrar welcome ou alternar para outra aba
+                if (activeTab === aiType) {
+                    activeTab = null;
+                    
+                    if (openTabs.size > 0) {
+                        // Alternar para a primeira aba disponível
+                        const firstTab = Array.from(openTabs)[0];
+                        switchTab(firstTab);
+                    } else {
+                        showWelcome();
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao fechar aba:', error);
+            }
+        }
+
+        // Listeners para eventos do processo principal
+        if (window.electronAPI) {
+            // Loading events
+            window.electronAPI.onLoadingStart((aiType) => {
+                console.log(`Loading iniciado para ${aiType}`);
+                if (openTabs.size === 1 && openTabs.has(aiType)) {
+                    showLoading();
+                }
+            });
+
+            window.electronAPI.onLoadingStop((aiType) => {
+                console.log(`Loading finalizado para ${aiType}`);
+                hideLoading();
+            });
+
+            window.electronAPI.onLoadingError((aiType, error) => {
+                console.error(`Erro de loading para ${aiType}:`, error);
+                hideLoading();
+                
+                // Mostrar notificação de erro
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(255, 0, 0, 0.8);
+                    color: white;
+                    padding: 15px;
+                    border-radius: 10px;
+                    z-index: 1000;
+                    max-width: 300px;
+                `;
+                notification.textContent = `Erro ao carregar ${aiType}: ${error}`;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 5000);
+            });
+        }
+
+        // Atalhos de teclado
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + 1, 2, 3, 4 para alternar entre as IAs
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        openAI('grok');
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        openAI('chatgpt');
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        openAI('deepseek');
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        openAI('claude');
+                        break;
+                    case 'w':
+                        if (activeTab) {
+                            e.preventDefault();
+                            closeTab(activeTab, { stopPropagation: () => {} });
+                        }
+                        break;
+                }
+            }
+        });
+
+        // Inicialização
+        console.log('🚀 AI Hub Desktop (Versão Frame Nativo) carregado com sucesso!');
+        console.log('💡 Dica: Use Ctrl + 1, 2, 3, 4 para alternar rapidamente entre as IAs');
+        console.log('💡 Use Ctrl + W para fechar a aba ativa');
+    </script>
+</body>
+</html>
