@@ -209,6 +209,139 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* Barra de busca no overlay */
+        .overlay-search-container {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 680px;
+            z-index: 100000;
+            padding: 0 40px;
+            box-sizing: border-box;
+            display: block;
+            pointer-events: auto;
+            position: absolute; /* relativo ao overlay */
+        }
+
+        .overlay-search-container .search-wrapper {
+            position: relative;
+        }
+
+        .overlay-search {
+            width: 100%;
+            padding: 12px 44px 12px 44px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.95);
+            color: #2c3e50;
+            font-size: 15px;
+            outline: none;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .overlay-search::placeholder {
+            color: #7f8c8d;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #7f8c8d;
+            pointer-events: none;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: rgba(0,0,0,0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #333;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .18s, visibility .18s;
+        }
+
+        .clear-search.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Mensagem de nenhum resultado */
+        .no-results {
+            position: absolute;
+            top: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            opacity: 0.9;
+            z-index: 100001;
+            display: none;
+            text-align: center;
+            padding: 8px 14px;
+            background: rgba(0,0,0,0.18);
+            border-radius: 10px;
+        }
+
+        /* Loading screen com robô no overlay */
+        .overlay-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .overlay-loading.hide {
+            opacity: 0;
+        }
+
+        .overlay-robot {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(255, 255, 255, 0.3));
+        }
+
+        .overlay-loading-text {
+            color: white;
+            font-size: 18px;
+            font-weight: 300;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0.9;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .overlay-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 10px;
+            opacity: 0.95;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
         /* Conteúdo das IAs no overlay */
         .overlay-content {
             position: absolute;
@@ -924,9 +1057,19 @@
             <div class="overlay-loading-text">Carregando IAs disponíveis...</div>
         </div>
         
+        <!-- Barra de busca no overlay -->
+        <div class="overlay-search-container" id="overlaySearchContainer" aria-hidden="false">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input id="overlaySearch" class="overlay-search" type="text" placeholder="Buscar IA (nome ou descrição)..." oninput="filterAIs()" />
+                <button id="clearSearch" class="clear-search" onclick="clearSearch()" title="Limpar">×</button>
+            </div>
+            <div id="noResults" class="no-results">Nenhuma IA encontrada</div>
+        </div>
+        
         <!-- Conteúdo das IAs -->
         <div class="overlay-content" id="overlayContent">
-            <!-- IAs principais já existentes -->
+            <!-- IAs principais de chat -->
             <div class="overlay-ai-item" onclick="openAI('grok'); closeAIMenu();">
                 <div class="overlay-ai-icon">🤖</div>
                 <div class="overlay-ai-info">
@@ -975,20 +1118,120 @@
                 </div>
             </div>
             
-            <!-- Novas IAs -->
-            <div class="overlay-ai-item" onclick="openAI('jasper'); closeAIMenu();">
-                <div class="overlay-ai-icon">✨</div>
-                <div class="overlay-ai-info">
-                    <div class="overlay-ai-name">Jasper Chat</div>
-                    <div class="overlay-ai-description">Melhor chatbot de IA para gerar ideias e conteúdo</div>
-                </div>
-            </div>
-            
             <div class="overlay-ai-item" onclick="openAI('perplexity'); closeAIMenu();">
                 <div class="overlay-ai-icon">🔍</div>
                 <div class="overlay-ai-info">
                     <div class="overlay-ai-name">Perplexity.ai</div>
-                    <div class="overlay-ai-description">Melhor chatbot de IA para aumentar o conhecimento a partir de diferentes fontes</div>
+                    <div class="overlay-ai-description">IA para pesquisa com fontes verificadas</div>
+                </div>
+            </div>
+            
+            <div class="overlay-ai-item" onclick="openAI('pi'); closeAIMenu();">
+                <div class="overlay-ai-icon">💫</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Pi</div>
+                    <div class="overlay-ai-description">Inflection AI - Assistente pessoal inteligente</div>
+                </div>
+            </div>
+            
+            <!-- Novas IAs de chat gratuitas -->
+            <div class="overlay-ai-item" onclick="openAI('poe'); closeAIMenu();">
+                <div class="overlay-ai-icon">🟣</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Poe</div>
+                    <div class="overlay-ai-description">Quora - Acesso a múltiplos modelos de IA</div>
+                </div>
+            </div>
+            
+            <div class="overlay-ai-item" onclick="openAI('mistral'); closeAIMenu();">
+                <div class="overlay-ai-icon">🌟</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Mistral Le Chat</div>
+                    <div class="overlay-ai-description">Mistral AI - Chat avançado gratuito</div>
+                </div>
+            </div>
+            
+            <div class="overlay-ai-item" onclick="openAI('youchat'); closeAIMenu();">
+                <div class="overlay-ai-icon">🔮</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">YouChat</div>
+                    <div class="overlay-ai-description">You.com - IA com busca na web integrada</div>
+                </div>
+            </div>
+            
+            <!-- IAs para código -->
+            <div class="overlay-ai-item" onclick="openAI('phind'); closeAIMenu();">
+                <div class="overlay-ai-icon">🎯</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Phind</div>
+                    <div class="overlay-ai-description">IA especializada em programação e desenvolvimento</div>
+                </div>
+            </div>
+            
+            <div class="overlay-ai-item" onclick="openAI('codeium'); closeAIMenu();">
+                <div class="overlay-ai-icon">💻</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Codeium</div>
+                    <div class="overlay-ai-description">Chat de IA gratuito para programadores</div>
+                </div>
+            </div>
+            
+            <!-- IAs para estudos -->
+            <div class="overlay-ai-item" onclick="openAI('elicit'); closeAIMenu();">
+                <div class="overlay-ai-icon">📚</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Elicit</div>
+                    <div class="overlay-ai-description">Assistente de pesquisa acadêmica</div>
+                </div>
+            </div>
+            
+            <div class="overlay-ai-item" onclick="openAI('consensus'); closeAIMenu();">
+                <div class="overlay-ai-icon">🔬</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Consensus</div>
+                    <div class="overlay-ai-description">Busca científica baseada em IA</div>
+                </div>
+            </div>
+            
+            <div class="overlay-ai-item" onclick="openAI('scispace'); closeAIMenu();">
+                <div class="overlay-ai-icon">🧪</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">SciSpace</div>
+                    <div class="overlay-ai-description">Assistente para pesquisa científica</div>
+                </div>
+            </div>
+            
+            <!-- IAs para imagem -->
+            <div class="overlay-ai-item" onclick="openAI('leonardo'); closeAIMenu();">
+                <div class="overlay-ai-icon">🎨</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Leonardo AI</div>
+                    <div class="overlay-ai-description">Geração de imagens com IA - créditos gratuitos</div>
+                </div>
+            </div>
+            
+            <div class="overlay-ai-item" onclick="openAI('ideogram'); closeAIMenu();">
+                <div class="overlay-ai-icon">🖼️</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Ideogram</div>
+                    <div class="overlay-ai-description">Criação de imagens e texto visual</div>
+                </div>
+            </div>
+            
+            <!-- IAs para áudio/música -->
+            <div class="overlay-ai-item" onclick="openAI('elevenlabs'); closeAIMenu();">
+                <div class="overlay-ai-icon">🎤</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">ElevenLabs</div>
+                    <div class="overlay-ai-description">Síntese de voz com IA - versão gratuita</div>
+                </div>
+            </div>
+            
+            <div class="overlay-ai-item" onclick="openAI('suno'); closeAIMenu();">
+                <div class="overlay-ai-icon">🎵</div>
+                <div class="overlay-ai-info">
+                    <div class="overlay-ai-name">Suno AI</div>
+                    <div class="overlay-ai-description">Criação de música com IA - versão gratuita</div>
                 </div>
             </div>
         </div>
@@ -1130,6 +1373,98 @@
                 icon: '🔍',
                 color: '#20B2AA',
                 description: 'Melhor chatbot de IA para aumentar o conhecimento a partir de diferentes fontes'
+            },
+            // Novas IAs gratuitas
+            pi: {
+                name: 'Pi',
+                url: 'https://pi.ai/talk',
+                icon: '💫',
+                color: '#ff6b9d',
+                description: 'Inflection AI - Assistente pessoal inteligente'
+            },
+            poe: {
+                name: 'Poe',
+                url: 'https://poe.com',
+                icon: '🟣',
+                color: '#8b5cf6',
+                description: 'Quora - Acesso a múltiplos modelos de IA'
+            },
+            mistral: {
+                name: 'Mistral Le Chat',
+                url: 'https://chat.mistral.ai',
+                icon: '🌟',
+                color: '#f97316',
+                description: 'Mistral AI - Chat avançado gratuito'
+            },
+            youchat: {
+                name: 'YouChat',
+                url: 'https://you.com',
+                icon: '🔮',
+                color: '#0ea5e9',
+                description: 'You.com - IA com busca na web integrada'
+            },
+            phind: {
+                name: 'Phind',
+                url: 'https://www.phind.com',
+                icon: '🎯',
+                color: '#10b981',
+                description: 'IA especializada em programação e desenvolvimento'
+            },
+            codeium: {
+                name: 'Codeium',
+                url: 'https://codeium.com/chat',
+                icon: '💻',
+                color: '#3b82f6',
+                description: 'Chat de IA gratuito para programadores'
+            },
+            elicit: {
+                name: 'Elicit',
+                url: 'https://elicit.org',
+                icon: '📚',
+                color: '#8b5a2b',
+                description: 'Assistente de pesquisa acadêmica'
+            },
+            consensus: {
+                name: 'Consensus',
+                url: 'https://consensus.app',
+                icon: '🔬',
+                color: '#059669',
+                description: 'Busca científica baseada em IA'
+            },
+            scispace: {
+                name: 'SciSpace',
+                url: 'https://typeset.io',
+                icon: '🧪',
+                color: '#7c3aed',
+                description: 'Assistente para pesquisa científica'
+            },
+            leonardo: {
+                name: 'Leonardo AI',
+                url: 'https://leonardo.ai',
+                icon: '🎨',
+                color: '#ec4899',
+                description: 'Geração de imagens com IA - créditos gratuitos'
+            },
+            ideogram: {
+                name: 'Ideogram',
+                url: 'https://ideogram.ai',
+                icon: '🖼️',
+                color: '#f59e0b',
+                description: 'Criação de imagens e texto visual'
+            },
+            elevenlabs: {
+                name: 'ElevenLabs',
+                url: 'https://elevenlabs.io',
+                icon: '🎤',
+                color: '#6366f1',
+                description: 'Síntese de voz com IA - versão gratuita'
+            },
+            suno: {
+                name: 'Suno AI',
+                url: 'https://suno.ai',
+                icon: '🎵',
+                color: '#f97316',
+                description: 'Criação de música com IA - versão gratuita'
             }
         };
 
@@ -1568,6 +1903,14 @@
                         e.preventDefault();
                         openAI('gemini');
                         break;
+                    case '7':
+                        e.preventDefault();
+                        openAI('perplexity');
+                        break;
+                    case '8':
+                        e.preventDefault();
+                        openAI('pi');
+                        break;
                     case 'w':
                         if (activeTab) {
                             e.preventDefault();
@@ -1619,11 +1962,19 @@
                     content.classList.add('show');
                 }, 50); // Pequeno delay para suavizar a transição
             }, 500); // 1 segundo de loading
-            
+
+
+
             // Fechar o menu se clicar fora dele (apenas no conteúdo, não no loading)
             setTimeout(() => {
                 document.addEventListener('click', closeMenuOnClickOutside);
             }, 500);
+
+            // Focar no input de busca após abrir o menu
+            setTimeout(() => { 
+                const s = document.getElementById('overlaySearch');
+                if (s) s.focus();
+            }, 120);
         }
 
         async function closeAIMenu() {
@@ -1654,12 +2005,34 @@
         function closeMenuOnClickOutside(event) {
             const overlay = document.getElementById('menuOverlay');
             const content = document.getElementById('overlayContent');
-            
-            // Fechar apenas se clicar fora do conteúdo das IAs
-            if (overlay.contains(event.target) && !content.contains(event.target)) {
+            const searchContainer = document.getElementById('overlaySearchContainer');
+
+            // Se o clique estiver no overlay, mas FORA do conteúdo principal E FORA da barra de busca => fechar
+            if (overlay && overlay.contains(event.target) &&
+                !content.contains(event.target) &&
+                !(searchContainer && searchContainer.contains(event.target))) {
                 closeAIMenu();
             }
         }
+
+        // Proteger a área da barra de busca contra propagação de eventos que fecham o menu
+        (function protectSearchArea() {
+            const searchContainer = document.getElementById('overlaySearchContainer');
+            if (!searchContainer) return;
+
+            // Evita fechamento quando clicar/tocar/digitar dentro da área de busca
+            ['click', 'mousedown', 'touchstart', 'keydown'].forEach(evt => {
+                searchContainer.addEventListener(evt, (e) => {
+                    e.stopPropagation();
+                }, { passive: true });
+            });
+
+            // Protege foco programático no input
+            const input = document.getElementById('overlaySearch');
+            if (input) {
+                input.addEventListener('focus', (e) => e.stopPropagation());
+            }
+        })();
 
         // Fechar menu com tecla Escape
         document.addEventListener('keydown', function(e) {
@@ -1695,7 +2068,7 @@
 
         // Inicialização
         console.log('🚀 AI Hub Desktop carregado com sucesso!');
-        console.log('💡 Dica: Use o menu hambúrguer (☰) ou Ctrl + 1, 2, 3, 4, 5, 6 para acessar as IAs rapidamente');
+        console.log('💡 Dica: Use o menu hambúrguer (☰) ou Ctrl + 1-8 para acessar as IAs rapidamente');
         console.log('💡 Use Ctrl + W para fechar a aba ativa');
 
         // Gerenciamento de estado da janela (minimizar/maximizar)
@@ -1761,11 +2134,47 @@
                 console.log('✅ Home tab ativa:', homeTab?.classList.contains('active'));
                 console.log('✅ Welcome visível:', welcomeElement?.style.display);
                 console.log('✅ Tab container oculto:', tabContainer?.style.display);
-                
             } catch (error) {
-                console.error('❌ Erro ao restaurar home:', error);
+                console.error('Erro ao forçar estado da home:', error);
             }
         }
+
+        /* Adicionar estas funções JS dentro do mesmo <script> (perto das outras funções já existentes). */
+        function filterAIs() {
+            const q = (document.getElementById('overlaySearch')?.value || '').toLowerCase().trim();
+            const clearBtn = document.getElementById('clearSearch');
+            const noResults = document.getElementById('noResults');
+
+            if (clearBtn) {
+                clearBtn.classList.toggle('show', q.length > 0);
+            }
+
+            const items = Array.from(document.querySelectorAll('.overlay-ai-item'));
+            let visible = 0;
+            items.forEach(item => {
+                const name = (item.querySelector('.overlay-ai-name')?.textContent || item.textContent || '').toLowerCase();
+                const desc = (item.querySelector('.overlay-ai-description')?.textContent || '').toLowerCase();
+                const match = q === '' || name.includes(q) || desc.includes(q);
+                item.style.display = match ? 'flex' : 'none';
+                if (match) visible++;
+            });
+
+            if (noResults) {
+                noResults.style.display = (visible === 0 && q.length > 0) ? 'block' : 'none';
+            }
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('overlaySearch');
+            if (input) {
+                input.value = '';
+                input.focus();
+            }
+            const clearBtn = document.getElementById('clearSearch');
+            if (clearBtn) clearBtn.classList.remove('show');
+            filterAIs();
+        }
     </script>
-</body>
-</html>
+
+
+</html></body>
