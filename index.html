@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,8 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 100vh;
             overflow: hidden;
-            padding-top: 30px; /* Espaço para o titleBar overlay - ajustado para 30px */
+            padding-top: 30px;
+            /* Espaço para o titleBar overlay - ajustado para 30px */
         }
 
         .title-bar-area {
@@ -24,7 +26,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 30px; /* Ajustado para 30px */
+            height: 30px;
+            /* Ajustado para 30px */
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-app-region: drag;
             display: flex;
@@ -33,7 +36,8 @@
             color: white;
             font-size: 13px;
             font-weight: 500;
-            z-index: 100000; /* Sempre no topo */
+            z-index: 100000;
+            /* Sempre no topo */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 0 15px;
         }
@@ -222,7 +226,8 @@
             box-sizing: border-box;
             display: block;
             pointer-events: auto;
-            position: absolute; /* relativo ao overlay */
+            position: absolute;
+            /* relativo ao overlay */
         }
 
         .overlay-search-container .search-wrapper {
@@ -233,12 +238,12 @@
             width: 100%;
             padding: 12px 44px 12px 44px;
             border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.18);
-            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.95);
             color: #2c3e50;
             font-size: 15px;
             outline: none;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
         }
 
         .overlay-search::placeholder {
@@ -263,7 +268,7 @@
             width: 28px;
             height: 28px;
             border: none;
-            background: rgba(0,0,0,0.06);
+            background: rgba(0, 0, 0, 0.06);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -294,7 +299,7 @@
             display: none;
             text-align: center;
             padding: 8px 14px;
-            background: rgba(0,0,0,0.18);
+            background: rgba(0, 0, 0, 0.18);
             border-radius: 10px;
         }
 
@@ -420,14 +425,24 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.9; }
-            50% { opacity: 0.6; }
+
+            0%,
+            100% {
+                opacity: 0.9;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-10px);
             }
@@ -461,22 +476,22 @@
                 grid-template-columns: 1fr;
                 padding: 40px 20px 20px 20px;
             }
-            
+
             .overlay-ai-item {
                 min-height: 70px;
                 padding: 15px;
                 gap: 12px;
             }
-            
+
             .overlay-ai-icon {
                 font-size: 24px;
                 min-width: 35px;
             }
-            
+
             .overlay-ai-name {
                 font-size: 15px;
             }
-            
+
             .overlay-ai-description {
                 font-size: 12px;
             }
@@ -611,43 +626,53 @@
         }
 
         .tab-container {
-            display: none; /* Inicialmente escondido */
+            display: none;
+            /* Inicialmente escondido */
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             backdrop-filter: blur(10px);
             padding: 0 30px;
-            overflow: hidden; /* Remove scroll */
+            overflow: hidden;
+            /* Remove scroll */
             -webkit-app-region: drag;
-            height: 72px; /* Altura fixa para consistência */
+            height: 72px;
+            /* Altura fixa para consistência */
             align-items: center;
         }
 
         .tab-container.has-tabs {
-            display: flex; /* Mostrar quando há abas */
+            display: flex;
+            /* Mostrar quando há abas */
         }
 
         .tab {
             background: rgba(255, 255, 255, 0.08);
             border: none;
             color: white;
-            padding: 12px 16px; /* Reduzido o padding */
+            padding: 12px 16px;
+            /* Reduzido o padding */
             cursor: pointer;
             border-radius: 12px 12px 0 0;
             margin-right: 4px;
             position: relative;
             display: flex;
             align-items: center;
-            gap: 8px; /* Reduzido o gap */
+            gap: 8px;
+            /* Reduzido o gap */
             transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-            min-width: 140px; /* Reduzido o min-width */
-            max-width: 200px; /* Adicionado max-width */
+            min-width: 140px;
+            /* Reduzido o min-width */
+            max-width: 200px;
+            /* Adicionado max-width */
             justify-content: space-between;
             -webkit-app-region: no-drag;
             backdrop-filter: blur(10px);
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: none;
-            flex-shrink: 0; /* Evita que as abas encolham demais */
-            user-select: none; /* Previne seleção de texto durante drag */
+            flex-shrink: 0;
+            /* Evita que as abas encolham demais */
+            user-select: none;
+            /* Previne seleção de texto durante drag */
         }
 
         .tab:hover {
@@ -745,19 +770,24 @@
         }
 
         .content {
-            height: calc(100vh - 30px); /* Apenas o titlebar de 30px quando não há abas */
+            height: calc(100vh - 30px);
+            /* Apenas o titlebar de 30px quando não há abas */
             position: relative;
-            pointer-events: none; /* Permite que BrowserViews recebam eventos */
-            transition: height 0.3s ease; /* Transição suave */
+            pointer-events: none;
+            /* Permite que BrowserViews recebam eventos */
+            transition: height 0.3s ease;
+            /* Transição suave */
         }
 
         /* Quando há abas, ajustar a altura */
-        .tab-container.has-tabs ~ .content {
-            height: calc(100vh - 90px); /* 30px titlebar + 60px abas */
+        .tab-container.has-tabs~.content {
+            height: calc(100vh - 90px);
+            /* 30px titlebar + 60px abas */
         }
 
         .content.showing-welcome {
-            pointer-events: auto; /* Reabilita eventos quando mostra welcome */
+            pointer-events: auto;
+            /* Reabilita eventos quando mostra welcome */
         }
 
         .tab-content {
@@ -803,9 +833,12 @@
             height: 60px;
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
             animation: float 4s ease-in-out infinite;
-            object-fit: contain; /* Manter proporções da imagem */
-            border-radius: 8px; /* Bordas levemente arredondadas */
-            background: transparent; /* Fundo transparente */
+            object-fit: contain;
+            /* Manter proporções da imagem */
+            border-radius: 8px;
+            /* Bordas levemente arredondadas */
+            background: transparent;
+            /* Fundo transparente */
         }
 
         .welcome p {
@@ -972,14 +1005,16 @@
         }
 
         @keyframes spin {
-            0% { 
+            0% {
                 transform: rotate(0deg);
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
+
             50% {
                 box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
             }
-            100% { 
+
+            100% {
                 transform: rotate(360deg);
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
@@ -1009,64 +1044,66 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Overlay para menu hambúrguer -->
     <div class="menu-overlay" id="menuOverlay">
-        
+
         <!-- Loading screen com robô -->
         <div class="overlay-loading" id="overlayLoading">
             <svg class="overlay-robot" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Cabeça do robô -->
-                <rect x="40" y="50" width="120" height="100" rx="20" stroke="white" stroke-width="3" fill="none"/>
-                
+                <rect x="40" y="50" width="120" height="100" rx="20" stroke="white" stroke-width="3" fill="none" />
+
                 <!-- Antenas -->
-                <line x1="70" y1="50" x2="70" y2="30" stroke="white" stroke-width="3"/>
-                <line x1="130" y1="50" x2="130" y2="30" stroke="white" stroke-width="3"/>
-                <circle cx="70" cy="30" r="5" stroke="white" stroke-width="3" fill="none"/>
-                <circle cx="130" cy="30" r="5" stroke="white" stroke-width="3" fill="none"/>
-                
+                <line x1="70" y1="50" x2="70" y2="30" stroke="white" stroke-width="3" />
+                <line x1="130" y1="50" x2="130" y2="30" stroke="white" stroke-width="3" />
+                <circle cx="70" cy="30" r="5" stroke="white" stroke-width="3" fill="none" />
+                <circle cx="130" cy="30" r="5" stroke="white" stroke-width="3" fill="none" />
+
                 <!-- Olhos -->
-                <circle cx="70" cy="80" r="12" stroke="white" stroke-width="3" fill="none"/>
-                <circle cx="130" cy="80" r="12" stroke="white" stroke-width="3" fill="none"/>
-                <circle cx="70" cy="80" r="6" fill="white"/>
-                <circle cx="130" cy="80" r="6" fill="white"/>
-                
+                <circle cx="70" cy="80" r="12" stroke="white" stroke-width="3" fill="none" />
+                <circle cx="130" cy="80" r="12" stroke="white" stroke-width="3" fill="none" />
+                <circle cx="70" cy="80" r="6" fill="white" />
+                <circle cx="130" cy="80" r="6" fill="white" />
+
                 <!-- Boca -->
-                <rect x="80" y="110" width="40" height="20" rx="10" stroke="white" stroke-width="3" fill="none"/>
-                <line x1="85" y1="115" x2="85" y2="125" stroke="white" stroke-width="2"/>
-                <line x1="95" y1="115" x2="95" y2="125" stroke="white" stroke-width="2"/>
-                <line x1="105" y1="115" x2="105" y2="125" stroke="white" stroke-width="2"/>
-                <line x1="115" y1="115" x2="115" y2="125" stroke="white" stroke-width="2"/>
-                
+                <rect x="80" y="110" width="40" height="20" rx="10" stroke="white" stroke-width="3" fill="none" />
+                <line x1="85" y1="115" x2="85" y2="125" stroke="white" stroke-width="2" />
+                <line x1="95" y1="115" x2="95" y2="125" stroke="white" stroke-width="2" />
+                <line x1="105" y1="115" x2="105" y2="125" stroke="white" stroke-width="2" />
+                <line x1="115" y1="115" x2="115" y2="125" stroke="white" stroke-width="2" />
+
                 <!-- Corpo -->
-                <rect x="60" y="150" width="80" height="40" rx="10" stroke="white" stroke-width="3" fill="none"/>
-                
+                <rect x="60" y="150" width="80" height="40" rx="10" stroke="white" stroke-width="3" fill="none" />
+
                 <!-- Braços -->
-                <rect x="20" y="160" width="40" height="15" rx="7" stroke="white" stroke-width="3" fill="none"/>
-                <rect x="140" y="160" width="40" height="15" rx="7" stroke="white" stroke-width="3" fill="none"/>
-                
+                <rect x="20" y="160" width="40" height="15" rx="7" stroke="white" stroke-width="3" fill="none" />
+                <rect x="140" y="160" width="40" height="15" rx="7" stroke="white" stroke-width="3" fill="none" />
+
                 <!-- Mãos -->
-                <circle cx="15" cy="167" r="8" stroke="white" stroke-width="3" fill="none"/>
-                <circle cx="185" cy="167" r="8" stroke="white" stroke-width="3" fill="none"/>
-                
+                <circle cx="15" cy="167" r="8" stroke="white" stroke-width="3" fill="none" />
+                <circle cx="185" cy="167" r="8" stroke="white" stroke-width="3" fill="none" />
+
                 <!-- Detalhes do peito -->
-                <circle cx="100" cy="170" r="8" stroke="white" stroke-width="2" fill="none"/>
-                <rect x="85" y="175" width="30" height="8" rx="4" stroke="white" stroke-width="2" fill="none"/>
+                <circle cx="100" cy="170" r="8" stroke="white" stroke-width="2" fill="none" />
+                <rect x="85" y="175" width="30" height="8" rx="4" stroke="white" stroke-width="2" fill="none" />
             </svg>
             <div class="overlay-text">AI HUB</div>
             <div class="overlay-loading-text">Carregando IAs disponíveis...</div>
         </div>
-        
+
         <!-- Barra de busca no overlay -->
         <div class="overlay-search-container" id="overlaySearchContainer" aria-hidden="false">
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input id="overlaySearch" class="overlay-search" type="text" placeholder="Buscar IA (nome ou descrição)..." oninput="filterAIs()" />
+                <input id="overlaySearch" class="overlay-search" type="text"
+                    placeholder="Buscar IA (nome ou descrição)..." oninput="filterAIs()" />
                 <button id="clearSearch" class="clear-search" onclick="clearSearch()" title="Limpar">×</button>
             </div>
             <div id="noResults" class="no-results">Nenhuma IA encontrada</div>
         </div>
-        
+
         <!-- Conteúdo das IAs -->
         <div class="overlay-content" id="overlayContent">
             <!-- IAs principais de chat -->
@@ -1077,7 +1114,7 @@
                     <div class="overlay-ai-description">IA do X (Twitter) - Conversas inteligentes</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('chatgpt'); closeAIMenu();">
                 <div class="overlay-ai-icon">💬</div>
                 <div class="overlay-ai-info">
@@ -1085,7 +1122,7 @@
                     <div class="overlay-ai-description">OpenAI - Assistente de IA mais popular</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('deepseek'); closeAIMenu();">
                 <div class="overlay-ai-icon">🧠</div>
                 <div class="overlay-ai-info">
@@ -1093,7 +1130,7 @@
                     <div class="overlay-ai-description">DeepSeek AI - IA avançada para análises</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('claude'); closeAIMenu();">
                 <div class="overlay-ai-icon">🎭</div>
                 <div class="overlay-ai-info">
@@ -1101,7 +1138,7 @@
                     <div class="overlay-ai-description">Anthropic - IA focada em segurança</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('copilot'); closeAIMenu();">
                 <div class="overlay-ai-icon">👨‍💻</div>
                 <div class="overlay-ai-info">
@@ -1109,7 +1146,7 @@
                     <div class="overlay-ai-description">Microsoft - IA para programação e produtividade</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('gemini'); closeAIMenu();">
                 <div class="overlay-ai-icon">🔷</div>
                 <div class="overlay-ai-info">
@@ -1117,7 +1154,7 @@
                     <div class="overlay-ai-description">Google - IA multimodal avançada</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('perplexity'); closeAIMenu();">
                 <div class="overlay-ai-icon">🔍</div>
                 <div class="overlay-ai-info">
@@ -1125,7 +1162,7 @@
                     <div class="overlay-ai-description">IA para pesquisa com fontes verificadas</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('pi'); closeAIMenu();">
                 <div class="overlay-ai-icon">💫</div>
                 <div class="overlay-ai-info">
@@ -1133,7 +1170,7 @@
                     <div class="overlay-ai-description">Inflection AI - Assistente pessoal inteligente</div>
                 </div>
             </div>
-            
+
             <!-- Novas IAs de chat gratuitas -->
             <div class="overlay-ai-item" onclick="openAI('poe'); closeAIMenu();">
                 <div class="overlay-ai-icon">🟣</div>
@@ -1142,7 +1179,7 @@
                     <div class="overlay-ai-description">Quora - Acesso a múltiplos modelos de IA</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('mistral'); closeAIMenu();">
                 <div class="overlay-ai-icon">🌟</div>
                 <div class="overlay-ai-info">
@@ -1150,7 +1187,7 @@
                     <div class="overlay-ai-description">Mistral AI - Chat avançado gratuito</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('youchat'); closeAIMenu();">
                 <div class="overlay-ai-icon">🔮</div>
                 <div class="overlay-ai-info">
@@ -1158,7 +1195,7 @@
                     <div class="overlay-ai-description">You.com - IA com busca na web integrada</div>
                 </div>
             </div>
-            
+
             <!-- IAs para código -->
             <div class="overlay-ai-item" onclick="openAI('phind'); closeAIMenu();">
                 <div class="overlay-ai-icon">🎯</div>
@@ -1167,7 +1204,7 @@
                     <div class="overlay-ai-description">IA especializada em programação e desenvolvimento</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('codeium'); closeAIMenu();">
                 <div class="overlay-ai-icon">💻</div>
                 <div class="overlay-ai-info">
@@ -1175,7 +1212,7 @@
                     <div class="overlay-ai-description">Chat de IA gratuito para programadores</div>
                 </div>
             </div>
-            
+
             <!-- IAs para estudos -->
             <div class="overlay-ai-item" onclick="openAI('elicit'); closeAIMenu();">
                 <div class="overlay-ai-icon">📚</div>
@@ -1184,7 +1221,7 @@
                     <div class="overlay-ai-description">Assistente de pesquisa acadêmica</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('consensus'); closeAIMenu();">
                 <div class="overlay-ai-icon">🔬</div>
                 <div class="overlay-ai-info">
@@ -1192,7 +1229,7 @@
                     <div class="overlay-ai-description">Busca científica baseada em IA</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('scispace'); closeAIMenu();">
                 <div class="overlay-ai-icon">🧪</div>
                 <div class="overlay-ai-info">
@@ -1200,7 +1237,7 @@
                     <div class="overlay-ai-description">Assistente para pesquisa científica</div>
                 </div>
             </div>
-            
+
             <!-- IAs para imagem -->
             <div class="overlay-ai-item" onclick="openAI('leonardo'); closeAIMenu();">
                 <div class="overlay-ai-icon">🎨</div>
@@ -1209,7 +1246,7 @@
                     <div class="overlay-ai-description">Geração de imagens com IA - créditos gratuitos</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('ideogram'); closeAIMenu();">
                 <div class="overlay-ai-icon">🖼️</div>
                 <div class="overlay-ai-info">
@@ -1217,7 +1254,7 @@
                     <div class="overlay-ai-description">Criação de imagens e texto visual</div>
                 </div>
             </div>
-            
+
             <!-- IAs para áudio/música -->
             <div class="overlay-ai-item" onclick="openAI('elevenlabs'); closeAIMenu();">
                 <div class="overlay-ai-icon">🎤</div>
@@ -1226,7 +1263,7 @@
                     <div class="overlay-ai-description">Síntese de voz com IA - versão gratuita</div>
                 </div>
             </div>
-            
+
             <div class="overlay-ai-item" onclick="openAI('suno'); closeAIMenu();">
                 <div class="overlay-ai-icon">🎵</div>
                 <div class="overlay-ai-info">
@@ -1236,7 +1273,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="title-bar-area">
         <div class="title-left">
             <button class="hamburger-menu" onclick="toggleAIMenu()">
@@ -1245,7 +1282,8 @@
                 <span></span>
             </button>
             <span class="app-icon">
-                <img src="robot-icon.png" alt="AI Hub Robot" style="width: 16px; height: 16px; object-fit: contain; vertical-align: middle;">
+                <img src="robot-icon.png" alt="AI Hub Robot"
+                    style="width: 16px; height: 16px; object-fit: contain; vertical-align: middle;">
             </span>
             <span class="title-text">AI Hub Desktop</span>
         </div>
@@ -1260,7 +1298,7 @@
                 <span style="font-size: 10px;">✕</span>
             </button>
         </div>
-        
+
     </div>
 
     <div class="tab-container" id="tabContainer">
@@ -1273,8 +1311,9 @@
                 <img class="welcome-logo" src="robot-icon.png" alt="AI Hub Robot" />
                 AI Hub
             </h1>
-            <p>Bem-vindo ao seu hub de inteligência artificial desktop! Use o menu hambúrguer (☰) no canto superior esquerdo para selecionar uma IA ou clique nos cartões abaixo.</p>
-            
+            <p>Bem-vindo ao seu hub de inteligência artificial desktop! Use o menu hambúrguer (☰) no canto superior
+                esquerdo para selecionar uma IA ou clique nos cartões abaixo.</p>
+
             <div class="ai-grid">
                 <div class="ai-card" onclick="openAI('grok')">
                     <div class="icon">🤖</div>
@@ -1474,7 +1513,7 @@
 
         async function openAI(aiType) {
             const config = aiConfigs[aiType];
-            
+
             if (openTabs.has(aiType)) {
                 // Se a aba já existe, apenas ativa ela
                 await switchTab(aiType);
@@ -1491,20 +1530,20 @@
 
             // Criar nova aba na interface
             createTab(aiType, config);
-            
+
             try {
                 // Criar BrowserView no processo principal
                 await window.electronAPI.createAITab(aiType, config.url);
-                
+
                 openTabs.add(aiType);
                 await switchTab(aiType);
-                
+
                 // Esconder a tela de boas-vindas
                 const welcomeElement = document.getElementById('welcome');
                 const contentElement = document.querySelector('.content');
                 welcomeElement.style.display = 'none';
                 contentElement.classList.remove('showing-welcome');
-                
+
                 console.log(`${config.name} criado com sucesso!`);
             } catch (error) {
                 console.error(`Erro ao criar ${config.name}:`, error);
@@ -1525,12 +1564,12 @@
 
         function createHomeTab() {
             const tabContainer = document.getElementById('tabContainer');
-            
+
             const homeTab = document.createElement('div');
             homeTab.className = 'tab home-tab';
             homeTab.id = 'tab-home';
             homeTab.onclick = () => switchToHome();
-            
+
             homeTab.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1539,44 +1578,44 @@
                     </svg>
                 </div>
             `;
-            
+
             // Inserir como primeira aba
             tabContainer.insertBefore(homeTab, tabContainer.firstChild);
-            
+
             // Mostrar o container de abas
             tabContainer.classList.add('has-tabs');
         }
 
         async function switchToHome() {
             console.log('Alternando para Home');
-            
+
             // Ocultar loading se estiver ativo
             hideLoading();
-            
+
             // Salvar a aba IA ativa atual
             if (activeTab && activeTab !== 'home') {
                 lastActiveAITab = activeTab;
                 console.log('Salvando última aba ativa:', lastActiveAITab);
             }
-            
+
             // Definir activeTab como home PRIMEIRO
             activeTab = 'home';
-            
+
             // Desativar todas as abas AI
             document.querySelectorAll('.tab:not(#tab-home)').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+
             // Ativar a aba home
             const homeTab = document.getElementById('tab-home');
             if (homeTab) {
                 homeTab.classList.add('active');
-                
+
                 // FORÇAR container de abas a ficar oculto
                 const tabContainer = document.getElementById('tabContainer');
                 tabContainer.style.display = 'none';
                 tabContainer.classList.remove('has-tabs');
-                
+
                 // Mostrar botão flutuante APENAS se há abas de IA abertas
                 const floatingButton = document.getElementById('floatingTabsButton');
                 if (openTabs.size > 0) {
@@ -1584,41 +1623,41 @@
                 } else {
                     floatingButton.classList.remove('show');
                 }
-                
+
                 // Mostrar tela de boas-vindas
                 const welcomeElement = document.getElementById('welcome');
                 const contentElement = document.querySelector('.content');
                 welcomeElement.style.display = 'flex';
                 contentElement.classList.add('showing-welcome');
-                
+
                 // Ocultar todas as BrowserViews E limpar activeAIType no main
                 try {
                     await window.electronAPI.goToHome(); // Nova função que limpa activeAIType
                 } catch (error) {
                     console.error('Erro ao ir para home:', error);
                 }
-                
+
                 console.log('Estado da home configurado - activeTab:', activeTab);
             }
         }
 
         async function returnToLastTab() {
             console.log('Retornando para última aba ativa');
-            
+
             // Mostrar container de abas
             const tabContainer = document.getElementById('tabContainer');
             tabContainer.style.display = 'flex';
-            
+
             // Ocultar botão flutuante
             const floatingButton = document.getElementById('floatingTabsButton');
             floatingButton.classList.remove('show');
-            
+
             // Ocultar tela de boas-vindas
             const welcomeElement = document.getElementById('welcome');
             const contentElement = document.querySelector('.content');
             welcomeElement.style.display = 'none';
             contentElement.classList.remove('showing-welcome');
-            
+
             // Voltar para a última aba IA ativa ou primeira disponível
             if (lastActiveAITab && openTabs.has(lastActiveAITab)) {
                 await switchTab(lastActiveAITab);
@@ -1630,66 +1669,66 @@
 
         function createTab(aiType, config) {
             const tabContainer = document.getElementById('tabContainer');
-            
+
             const tab = document.createElement('div');
             tab.className = 'tab';
             tab.id = `tab-${aiType}`;
             tab.onclick = () => switchTab(aiType);
             tab.draggable = true; // Tornar a aba arrastável
-            
+
             tab.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <span>${config.icon} ${config.name}</span>
                 </div>
                 <button class="close-tab" onclick="closeTab('${aiType}', event)">×</button>
             `;
-            
+
             // Event listeners para drag and drop
             tab.addEventListener('dragstart', handleDragStart);
             tab.addEventListener('dragover', handleDragOver);
             tab.addEventListener('drop', handleDrop);
             tab.addEventListener('dragend', handleDragEnd);
-            
+
             tabContainer.appendChild(tab);
-            
+
             // Mostrar o container de abas quando há pelo menos uma aba
             tabContainer.classList.add('has-tabs');
         }
 
         async function switchTab(aiType) {
             console.log(`Alternando para ${aiType}`);
-            
+
             // Se não é a aba home, salvar como última aba IA ativa
             if (aiType !== 'home') {
                 lastActiveAITab = aiType;
             }
-            
+
             // Desativar todas as abas
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+
             // Ativar a aba selecionada
             const tab = document.getElementById(`tab-${aiType}`);
             if (tab) {
                 tab.classList.add('active');
                 activeTab = aiType;
-                
+
                 // Se não é aba home, garantir que abas estejam visíveis e botão flutuante oculto
                 if (aiType !== 'home') {
                     const tabContainer = document.getElementById('tabContainer');
                     tabContainer.style.display = 'flex';
-                    
+
                     const floatingButton = document.getElementById('floatingTabsButton');
                     floatingButton.classList.remove('show');
-                    
+
                     // Ocultar tela de boas-vindas
                     const welcomeElement = document.getElementById('welcome');
                     const contentElement = document.querySelector('.content');
                     welcomeElement.style.display = 'none';
                     contentElement.classList.remove('showing-welcome');
                 }
-                
+
                 // Alternar BrowserView no processo principal (apenas para abas de IA)
                 if (aiType !== 'home') {
                     try {
@@ -1703,40 +1742,40 @@
 
         async function closeTab(aiType, event) {
             event.stopPropagation(); // Evita que o clique ative a aba
-            
+
             console.log(`Fechando aba ${aiType}`);
-            
+
             // Remover aba da interface
             const tab = document.getElementById(`tab-${aiType}`);
             if (tab) tab.remove();
-            
+
             // Remover do set de abas abertas
             openTabs.delete(aiType);
-            
+
             // Se não há mais abas de IA, remover também a aba home
             if (openTabs.size === 0) {
                 const homeTab = document.getElementById('tab-home');
                 if (homeTab) homeTab.remove();
-                
+
                 const tabContainer = document.getElementById('tabContainer');
                 tabContainer.classList.remove('has-tabs');
                 tabContainer.style.display = 'none'; // Forçar ocultação
-                
+
                 // Ocultar botão flutuante
                 const floatingButton = document.getElementById('floatingTabsButton');
                 floatingButton.classList.remove('show');
-                
+
                 // Forçar activeTab para home quando não há abas
                 activeTab = 'home';
             }
-            
+
             try {
                 // Fechar BrowserView no processo principal
                 await window.electronAPI.closeAITab(aiType);
             } catch (error) {
                 console.error(`Erro ao fechar ${aiType}:`, error);
             }
-            
+
             // Se era a aba ativa, selecionar outra ou mostrar boas-vindas
             if (activeTab === aiType) {
                 if (openTabs.size > 0) {
@@ -1747,14 +1786,14 @@
                     // Não há mais abas - resetar para estado inicial
                     activeTab = 'home';
                     lastActiveAITab = null;
-                    
+
                     // Esconder todas as views
                     try {
                         await window.electronAPI.goToHome(); // Limpa activeAIType no main
                     } catch (error) {
                         console.error('Erro ao ir para home:', error);
                     }
-                    
+
                     // Mostrar tela de boas-vindas
                     document.getElementById('welcome').style.display = 'flex';
                     document.querySelector('.content').classList.add('showing-welcome');
@@ -1763,13 +1802,13 @@
                 // Se não era a aba ativa mas não há mais abas, ainda precisa resetar
                 activeTab = 'home';
                 lastActiveAITab = null;
-                
+
                 try {
                     await window.electronAPI.goToHome();
                 } catch (error) {
                     console.error('Erro ao ir para home:', error);
                 }
-                
+
                 document.getElementById('welcome').style.display = 'flex';
                 document.querySelector('.content').classList.add('showing-welcome');
             }
@@ -1832,7 +1871,7 @@
 
             window.electronAPI.onCloseTab((event) => {
                 if (activeTab) {
-                    closeTab(activeTab, { stopPropagation: () => {} });
+                    closeTab(activeTab, { stopPropagation: () => { } });
                 }
             });
 
@@ -1850,7 +1889,7 @@
             window.electronAPI.onLoadingError((event, aiType, error) => {
                 console.error(`${aiType} erro de carregamento:`, error);
                 hideLoading();
-                
+
                 // Mostrar notificação de erro
                 const notification = document.createElement('div');
                 notification.style.cssText = `
@@ -1865,9 +1904,9 @@
                     max-width: 300px;
                 `;
                 notification.textContent = `Erro ao carregar ${aiType}: ${error}`;
-                
+
                 document.body.appendChild(notification);
-                
+
                 setTimeout(() => {
                     document.body.removeChild(notification);
                 }, 5000);
@@ -1875,10 +1914,10 @@
         }
 
         // Atalhos de teclado
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             // Ctrl + 1, 2, 3, 4 para alternar entre as IAs
             if (e.ctrlKey || e.metaKey) {
-                switch(e.key) {
+                switch (e.key) {
                     case '1':
                         e.preventDefault();
                         openAI('grok');
@@ -1914,7 +1953,7 @@
                     case 'w':
                         if (activeTab) {
                             e.preventDefault();
-                            closeTab(activeTab, { stopPropagation: () => {} });
+                            closeTab(activeTab, { stopPropagation: () => { } });
                         }
                         break;
                 }
@@ -1924,7 +1963,7 @@
         // Funções do Menu Hambúrguer
         function toggleAIMenu() {
             const overlay = document.getElementById('menuOverlay');
-            
+
             if (overlay.classList.contains('show')) {
                 closeAIMenu();
             } else {
@@ -1937,15 +1976,15 @@
             const hamburger = document.querySelector('.hamburger-menu');
             const loadingScreen = document.getElementById('overlayLoading');
             const content = document.getElementById('overlayContent');
-            
+
             // Reset do estado do conteúdo ANTES de mostrar o overlay
             loadingScreen.classList.remove('hide');
             content.classList.remove('show');
-            
+
             // Mostrar overlay com loading
             overlay.classList.add('show');
             hamburger.classList.add('active');
-            
+
             // Notificar o processo principal para ocultar BrowserViews
             if (window.electronAPI) {
                 try {
@@ -1954,7 +1993,7 @@
                     console.error('Erro ao notificar abertura do menu:', error);
                 }
             }
-            
+
             // Simular loading e mostrar conteúdo após delay
             setTimeout(() => {
                 loadingScreen.classList.add('hide');
@@ -1971,7 +2010,7 @@
             }, 500);
 
             // Focar no input de busca após abrir o menu
-            setTimeout(() => { 
+            setTimeout(() => {
                 const s = document.getElementById('overlaySearch');
                 if (s) s.focus();
             }, 120);
@@ -1982,14 +2021,14 @@
             const hamburger = document.querySelector('.hamburger-menu');
             const loadingScreen = document.getElementById('overlayLoading');
             const content = document.getElementById('overlayContent');
-            
+
             overlay.classList.remove('show');
             hamburger.classList.remove('active');
-            
+
             // Reset dos estados para garantir comportamento consistente na próxima abertura
             loadingScreen.classList.remove('hide');
             content.classList.remove('show');
-            
+
             // Notificar o processo principal para restaurar BrowserView ativa
             if (window.electronAPI && activeTab) {
                 try {
@@ -1998,7 +2037,7 @@
                     console.error('Erro ao notificar fechamento do menu:', error);
                 }
             }
-            
+
             document.removeEventListener('click', closeMenuOnClickOutside);
         }
 
@@ -2035,7 +2074,7 @@
         })();
 
         // Fechar menu com tecla Escape
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeAIMenu();
             }
@@ -2072,9 +2111,9 @@
         console.log('💡 Use Ctrl + W para fechar a aba ativa');
 
         // Gerenciamento de estado da janela (minimizar/maximizar)
-        window.addEventListener('focus', function() {
+        window.addEventListener('focus', function () {
             console.log('Janela focada - estado atual:', activeTab);
-            
+
             // REGRA SIMPLES: Se activeTab for 'home', garantir que estamos na tela inicial
             if (activeTab === 'home') {
                 console.log('Restaurando tela inicial');
@@ -2082,7 +2121,7 @@
             }
         });
 
-        window.addEventListener('blur', function() {
+        window.addEventListener('blur', function () {
             console.log('Janela desfocada - estado atual:', activeTab);
         });
 
@@ -2090,21 +2129,21 @@
         async function forceHomeState() {
             try {
                 console.log('🏠 Forçando estado da home...');
-                
+
                 // 1. Ocultar TODAS as BrowserViews E limpar activeAIType no main
                 await window.electronAPI.goToHome(); // Nova função que limpa activeAIType
-                
+
                 // 2. DESATIVAR todas as abas AI (deixar apenas home ativa)
                 document.querySelectorAll('.tab:not(#tab-home)').forEach(tab => {
                     tab.classList.remove('active');
                 });
-                
+
                 // 3. Garantir que APENAS home tab esteja ativa
                 const homeTab = document.getElementById('tab-home');
                 if (homeTab) {
                     homeTab.classList.add('active');
                 }
-                
+
                 // 4. FORÇAR tela de boas-vindas visível
                 const welcomeElement = document.getElementById('welcome');
                 const contentElement = document.querySelector('.content');
@@ -2112,14 +2151,14 @@
                     welcomeElement.style.display = 'flex';
                     contentElement.classList.add('showing-welcome');
                 }
-                
+
                 // 5. FORÇAR container de abas oculto
                 const tabContainer = document.getElementById('tabContainer');
                 if (tabContainer) {
                     tabContainer.style.display = 'none';
                     tabContainer.classList.remove('has-tabs');
                 }
-                
+
                 // 6. Mostrar botão flutuante APENAS se há abas abertas
                 const floatingButton = document.getElementById('floatingTabsButton');
                 if (floatingButton) {
@@ -2129,7 +2168,7 @@
                         floatingButton.classList.remove('show');
                     }
                 }
-                
+
                 console.log('✅ Estado da home restaurado - activeTab:', activeTab);
                 console.log('✅ Home tab ativa:', homeTab?.classList.contains('active'));
                 console.log('✅ Welcome visível:', welcomeElement?.style.display);
@@ -2177,4 +2216,5 @@
     </script>
 
 
-</html></body>
+</html>
+</body>
