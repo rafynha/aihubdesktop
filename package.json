@@ -1,6 +1,6 @@
 {
   "name": "ai-hub-desktop",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Hub desktop para múltiplas inteligências artificiais",
   "main": "main.js",
   "homepage": ".",
@@ -47,7 +47,7 @@
       "node_modules/**/*"
     ],
     "win": {
-      "target": "portable",
+      "target": "nsis",
       "icon": "robot-icon.png"
     },
     "mac": {
